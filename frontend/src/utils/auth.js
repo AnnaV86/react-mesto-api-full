@@ -1,4 +1,4 @@
-const BASE_URL = 'https://auth.nomoreparties.co';
+const BASE_URL = 'http://api.mestovid.students.nomoredomains.xyz';
 
 /**
  * Обработка ответа от сервера
@@ -76,10 +76,10 @@ export const validJWTFetch = async (jwt) => {
  * Проверка авторизации
  */
 
-// export const checkAuth = async () => {
-//   const token = localStorage.getItem('token');
-//   if (!token) {
-//     return false;
-//   }
-//   return await validJWTFetch(token);
-// };
+export const checkAuth = async () => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return false;
+  }
+  return await validJWTFetch(token);
+};

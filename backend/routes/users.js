@@ -10,6 +10,8 @@ const {
 } = require('../controllers/users');
 
 router.get('/users', getUsers);
+
+// Получение информации о пользователе GET users/me
 router.get('/users/me', getProfile);
 router.get(
   '/users/:userId',
@@ -20,6 +22,7 @@ router.get(
   }),
   getUserId,
 );
+// Редактирование данных пользователя PATCH
 router.patch(
   '/users/me',
   celebrate({
@@ -30,7 +33,7 @@ router.patch(
   }),
   updateUserInfo,
 );
-
+// Редактирование аватара пользователя PATCH
 router.patch(
   '/users/me/avatar',
   celebrate({
