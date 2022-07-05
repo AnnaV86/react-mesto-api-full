@@ -18,7 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r ./build/* vidutina@51.250.84.1:/home/vidutina/mesto-frontend"
+    "deploy": "npm run build && scp -r ./build/* vidutina@51.250.84.1:/home/vidutina/react-mesto-api-full/frontend"
   },
   "eslintConfig": {
     "extends": [

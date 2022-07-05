@@ -115,8 +115,8 @@ export const App = () => {
 
   const onRegister = async (userData) => {
     const response = await signupFetch(userData);
-
-    if (response.data) {
+ 
+    if (response) {
       setMessageAcceptAuth('Вы успешно зарегистрировались!');
       setIsAccept(true);
       setInfoTooltip(true);

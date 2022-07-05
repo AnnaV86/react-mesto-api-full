@@ -69,7 +69,7 @@ export class Api {
       headers: this._headers,
     }).then(this._getResponseData);
   }
-  
+
   // Редактирование аватара пользователя PATCH
   setUpdateAvatar(avatarLink) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
