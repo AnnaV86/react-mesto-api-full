@@ -1,0 +1,6 @@
+.element-item__like-count {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,8 @@
+.profile__avatar-editing {
+  background-image: url(../../../images/VectorBig.svg);
+  background-color: unset;
+  width: 26px;
+  height: 26px;
+  border: none;
+  cursor: pointer;
+}

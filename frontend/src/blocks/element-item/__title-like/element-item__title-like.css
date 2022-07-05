@@ -1,0 +1,7 @@
+.element-item__title-like {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 20px 22px 21px;
+  box-sizing: border-box;
+}
