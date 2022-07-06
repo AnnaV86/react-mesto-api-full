@@ -132,15 +132,17 @@ export const App = () => {
  // Проверка токена
   const tokenCheck = () => {
     const token = localStorage.getItem('token');
+    console.log('проверка токена>', token)
     if (!token) {
       return false;
     }
-    return validJWTFetch(token);
+    return validJWTFetch();
   };
 
  // Авторизация (вход)
   const onLogin = async (userData) => {
     const response = await signinFetch(userData);
+    console.log(response)
 
     if (response.token) {
       setLogin(true);
@@ -166,15 +168,16 @@ export const App = () => {
   useEffect(() => {
     (async () => {
       const response = await tokenCheck();
+      console.log('useEffect проверка токена тут>>>', response)
       if (response) {
         setLogin(true);
         setUserDataAuth({
-          email: response.data.email,
+          email: response.email,
         });
         navigate('/main');
       }
     })();
-  }, []);
+  }, [login]);
 
   useEffect(() => {
     document.addEventListener('keyup', handleEscClose);

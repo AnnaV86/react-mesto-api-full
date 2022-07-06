@@ -65,6 +65,7 @@ export const validJWTFetch = async () => {
   const response = await fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
+      authorization: `Bearer ${localStorage.getItem('token')}`,
       'Content-Type': 'application/json',
     },
   });

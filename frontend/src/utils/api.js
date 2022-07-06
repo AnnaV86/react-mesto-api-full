@@ -93,7 +93,7 @@ export class Api {
 const api = new Api({
   baseUrl: 'http://api.mestovid.students.nomoredomains.xyz',
   headers: {
-    authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    authorization: `Bearer ${localStorage.getItem('token')}`,
     'Content-Type': 'application/json',
   },
 });
