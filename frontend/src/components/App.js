@@ -13,7 +13,7 @@ import { Login } from './Login';
 import { Register } from './Register';
 import ProtectedRoute from './ProtectedRoute';
 import { InfoToolTip } from './InfoTooltip';
-import { signupFetch, signinFetch, validJWTFetch } from '../utils/auth';
+import { signupFetch, signinFetch, validJWTFetch, logout } from '../utils/auth';
 
 export const App = () => {
   const navigate = useNavigate();
@@ -113,6 +113,7 @@ export const App = () => {
     }
   };
 
+  // Регистрация
   const onRegister = async (userData) => {
     const response = await signupFetch(userData);
 
@@ -136,6 +137,7 @@ export const App = () => {
   //   return validJWTFetch(token);
   // };
 
+  //Авторизация (Войти)
   const onLogin = async (userData) => {
     const response = await signinFetch(userData);
     console.log('ПОСМОТРИ ТУТ Арр', response)
@@ -154,12 +156,18 @@ export const App = () => {
     }
   };
 
-  const onSignOut = () => {
-    // localStorage.removeItem('token');
-    setLogin(false);
-    setUserDataAuth({
-      email: '',
-    });
+  // выход из аккаунта
+  const onSignOut = async () => {
+    const response = await logout()
+    if (response) {
+      setLogin(false);
+      setUserDataAuth({
+        email: '',
+      });
+      navigate('/sign-in');
+    } else {
+      console.log(`Что-то пошло не так!`);
+    }
   };
 
   console.log(login)
@@ -175,6 +183,12 @@ export const App = () => {
           email: response.email,
         });
         navigate('/main');
+      } else {
+        setLogin(false);
+        setUserDataAuth({
+          email:'',
+        });
+        navigate('/sign-in');
       }
     })();
   }, []);

@@ -29,6 +29,18 @@ module.exports.login = (req, res, next) => {
     .catch(() => next(new UnauthorizedError('Неправильные почта или пароль')));
 };
 
+// Выход из аккаунта logout
+module.exports.logout = (req, res, next) => {
+  User.findById(req.user._id)
+    .then((user) => {
+      if (!user) {
+        return next(new NotFoundError('Пользователь не найден'));
+      }
+      return res.clearCookie('jwt').status(200).send({ message: 'Выход выполнен' });
+    })
+    .catch(next);
+};
+
 // Получение информации о пользователе GET users/me
 module.exports.getProfile = (req, res, next) => User
   .findById(req.user._id)

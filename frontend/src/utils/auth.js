@@ -71,7 +71,7 @@ export const validJWTFetch = async () => {
     },
     credentials: 'include',
   });
-  
+
   return await getResponse(response);
 };
 
@@ -86,3 +86,20 @@ export const validJWTFetch = async () => {
 //   }
 //   return await validJWTFetch(token);
 // };
+
+
+/**
+ * Выход из аккаунта
+ */
+
+ export const logout = async () => {
+  const response = await fetch(`${BASE_URL}/logout`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
+
+  return await getResponse(response);
+};
