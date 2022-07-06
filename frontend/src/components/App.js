@@ -166,7 +166,7 @@ export const App = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await api.getUserInfo();
+      const response = await validJWTFetch();
       console.log('я тут', response);
       if (response) {
         console.log('я тут', response)
@@ -177,7 +177,7 @@ export const App = () => {
         navigate('/main');
       }
     })();
-  }, [login]);
+  }, []);
 
   useEffect(() => {
     document.addEventListener('keyup', handleEscClose);

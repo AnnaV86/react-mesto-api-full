@@ -9,7 +9,6 @@ const getResponse = (response) => {
     if (!response.ok) {
       throw new Error('Ошибка запроса');
     }
-    console.log('ответа от сервера2', response.json());
     return response.json();
   } catch (err) {
     return err;
@@ -64,18 +63,17 @@ export const signinFetch = async (authData) => {
     "email":"email@email.ru"
   }
 //  */
-// export const validJWTFetch = async (jwt) => {
-//   const response = await fetch(`${BASE_URL}/users/me`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Authorization: `Bearer ${jwt}`,
-//     },
-//     credentials: 'include',
-//   });
-
-//   return await getResponse(response);
-// };
+export const validJWTFetch = async () => {
+  const response = await fetch(`${BASE_URL}/users/me`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
+  
+  return await getResponse(response);
+};
 
 /**
  * Проверка авторизации
