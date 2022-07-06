@@ -20,6 +20,7 @@ const allowedCors = {
     'http://mestovid.students.nomoredomains.sbs',
     'https://mestovid.students.nomoredomains.sbs',
   ],
+  allowedHeaders: ['Content-Type', 'Origin', 'Referer', 'Accept', 'Authorization'],
   credentials: true,
 };
 
