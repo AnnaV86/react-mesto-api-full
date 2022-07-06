@@ -14,9 +14,9 @@ module.exports.getCards = (req, res, next) => {
 
 // Создание карточки POST
 module.exports.createCard = (req, res, next) => {
-  const { name, link, user } = req.body;
+  const { link, user } = req.body;
 
-  Card.create({ name, link, owner: user })
+  Card.create({ name: 'привет', link, owner: user })
     .then(async (card) => res.send(card))
     .catch((error) => {
       if (error.name === 'ValidationError') {

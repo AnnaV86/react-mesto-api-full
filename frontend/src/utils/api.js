@@ -32,6 +32,7 @@ export class Api {
 
   // Создание карточки POST
   postNewCard(newCard) {
+    console.log('отправка', newCard)
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
