@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { PopupWithForm } from './PopupWithForm';
 import classNames from 'classnames';
 
-export const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
+export const AddPlacePopup = ({ isOpen, onClose, onAddPlace, currentUser }) => {
   const [name, setName] = useState('');
   const [link, setLink] = useState('');
   const [isNameValid, setNameValid] = useState(false);
@@ -54,6 +54,7 @@ export const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
     onAddPlace({
       name,
       link,
+      user: currentUser,
     });
     setName('');
     setLink('');

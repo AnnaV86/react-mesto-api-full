@@ -103,7 +103,8 @@ export const App = () => {
   const handleAddPlaceSubmit = (card) => {
     api
       .postNewCard(card)
-      .then((newCard) => setCards([newCard, ...cards]))
+      .then((newCard) => {
+        return setCards([newCard, ...cards])})
       .then(() => closeAllPopups())
       .catch((err) => console.log(err));
   };
@@ -253,6 +254,7 @@ export const App = () => {
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onAddPlace={handleAddPlaceSubmit}
+            currentUser={currentUser}
           />
           <DeleteCardPopup
             isOpen={isDeletePopupOpen}
