@@ -115,7 +115,7 @@ export const App = () => {
 
   const onRegister = async (userData) => {
     const response = await signupFetch(userData);
- 
+
     if (response) {
       setMessageAcceptAuth('Вы успешно зарегистрировались!');
       setIsAccept(true);
@@ -128,21 +128,22 @@ export const App = () => {
     }
   };
 
-  const tokenCheck = () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return false;
-    }
-    return validJWTFetch(token);
-  };
+  // const tokenCheck = () => {
+  //   const token = localStorage.getItem('token');
+  //   if (!token) {
+  //     return false;
+  //   }
+  //   return validJWTFetch(token);
+  // };
 
   const onLogin = async (userData) => {
     const response = await signinFetch(userData);
+    console.log(response)
 
-    if (response.token) {
+    if (response) {
       setLogin(true);
       setUserDataAuth(userData);
-      localStorage.setItem('token', response.token);
+      // localStorage.setItem('token', response.token);
       navigate('/main');
     } else {
       setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
@@ -152,25 +153,29 @@ export const App = () => {
   };
 
   const onSignOut = () => {
-    localStorage.removeItem('token');
+    // localStorage.removeItem('token');
     setLogin(false);
     setUserDataAuth({
       email: '',
     });
   };
+  
+  console.log(login)
 
   useEffect(() => {
     (async () => {
-      const response = await tokenCheck();
+      const response = await api.getUserInfo();
+      console.log('я тут', response);
       if (response) {
+        console.log('я тут', response)
         setLogin(true);
         setUserDataAuth({
-          email: response.data.email,
+          email: response.email,
         });
         navigate('/main');
       }
     })();
-  }, []);
+  }, [login]);
 
   useEffect(() => {
     document.addEventListener('keyup', handleEscClose);
@@ -180,6 +185,7 @@ export const App = () => {
     if (login) {
       Promise.all([api.getUserInfo(), api.getCardList()])
         .then((res) => {
+          console.log('тут',res)
           const [userData, cards] = res;
           setCurrentUser(userData);
           setCards(cards);

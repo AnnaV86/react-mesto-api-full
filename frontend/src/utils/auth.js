@@ -4,6 +4,7 @@ const BASE_URL = 'http://api.mestovid.students.nomoredomains.xyz';
  * Обработка ответа от сервера
  */
 const getResponse = (response) => {
+  console.log('ответа от сервера', response)
   try {
     if (!response.ok) {
       throw new Error('Ошибка запроса');
@@ -30,6 +31,7 @@ export const signupFetch = async (authData) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(authData),
+    credentials: 'include',
   });
 
   return await getResponse(response);
@@ -38,7 +40,7 @@ export const signupFetch = async (authData) => {
 /**
  * Авторизация
  * @return пример успешного ответа {
-    "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjUxNDhlNWJiODhmZGNhOTIxYjZhYzciLCJpYXQiOjE1OTkyMTExNzN9.Q3DVLh7t0f0BjyG9gh3UlUREYQxl2chdGTGy701lF6I"
+   
   }
  */
 export const signinFetch = async (authData) => {
@@ -48,6 +50,7 @@ export const signinFetch = async (authData) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(authData),
+    credentials: 'include',
   });
 
   return await getResponse(response);
@@ -59,27 +62,28 @@ export const signinFetch = async (authData) => {
     "_id":"1f525cf06e02630312f3fed7",
     "email":"email@email.ru"
   }
- */
-export const validJWTFetch = async (jwt) => {
-  const response = await fetch(`${BASE_URL}/users/me`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${jwt}`,
-    },
-  });
+//  */
+// export const validJWTFetch = async (jwt) => {
+//   const response = await fetch(`${BASE_URL}/users/me`, {
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       Authorization: `Bearer ${jwt}`,
+//     },
+//     credentials: 'include',
+//   });
 
-  return await getResponse(response);
-};
+//   return await getResponse(response);
+// };
 
 /**
  * Проверка авторизации
  */
 
-export const checkAuth = async () => {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    return false;
-  }
-  return await validJWTFetch(token);
-};
+// export const checkAuth = async () => {
+//   const token = localStorage.getItem('token');
+//   if (!token) {
+//     return false;
+//   }
+//   return await validJWTFetch(token);
+// };
