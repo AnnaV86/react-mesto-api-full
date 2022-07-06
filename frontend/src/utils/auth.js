@@ -9,6 +9,7 @@ const getResponse = (response) => {
     if (!response.ok) {
       throw new Error('Ошибка запроса');
     }
+    console.log('ответа от сервера2', response.json());
     return response.json();
   } catch (err) {
     return err;

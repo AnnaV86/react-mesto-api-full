@@ -138,14 +138,16 @@ export const App = () => {
 
   const onLogin = async (userData) => {
     const response = await signinFetch(userData);
-    console.log(response)
+    console.log('ПОСМОТРИ ТУТ Арр', response)
 
     if (response) {
+      console.log('ПОСМОТРИ ТУТ Арр2', response)
       setLogin(true);
       setUserDataAuth(userData);
       // localStorage.setItem('token', response.token);
       navigate('/main');
     } else {
+      console.log('ПОСМОТРИ ТУТ Арр3', response)
       setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
       setIsAccept(false);
       setInfoTooltip(true);
@@ -159,7 +161,7 @@ export const App = () => {
       email: '',
     });
   };
-  
+
   console.log(login)
 
   useEffect(() => {
