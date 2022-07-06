@@ -64,7 +64,6 @@ export class Api {
 
   // Убрать лайк DELETE
   deleteLike(id) {
-    console.log('start')
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: this._headers,

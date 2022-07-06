@@ -38,12 +38,9 @@ export const App = () => {
     const isLiked = oldCard.likes.some((i) => i === currentUser._id);
     api.changeLikeCardStatus(oldCard._id, !isLiked).then((newCard) => {
           setCards((prev) => prev.map((card) => {
-            console.log('card>', card, 'newCard>', newCard)
             return card._id === oldCard._id ? newCard : card}));
     });
   };
-
-  console.log(cards)
 
   const handleAcceptDelete = (card) => {
     setDeletePopupOpen(true);
@@ -121,7 +118,7 @@ export const App = () => {
   const onRegister = async (userData) => {
     const response = await signupFetch(userData);
 
-    if (response.data) {
+    if (response) {
       setMessageAcceptAuth('Вы успешно зарегистрировались!');
       setIsAccept(true);
       setInfoTooltip(true);
