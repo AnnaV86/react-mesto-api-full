@@ -31,7 +31,6 @@ export const signupFetch = async (authData) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(authData),
-    credentials: 'include',
   });
 
   return await getResponse(response);
@@ -50,7 +49,6 @@ export const signinFetch = async (authData) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(authData),
-    credentials: 'include',
   });
 
   return await getResponse(response);
@@ -69,7 +67,6 @@ export const validJWTFetch = async () => {
     headers: {
       'Content-Type': 'application/json',
     },
-    credentials: 'include',
   });
 
   return await getResponse(response);
@@ -87,19 +84,3 @@ export const validJWTFetch = async () => {
 //   return await validJWTFetch(token);
 // };
 
-
-/**
- * Выход из аккаунта
- */
-
- export const logout = async () => {
-  const response = await fetch(`${BASE_URL}/logout`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
-  });
-
-  return await getResponse(response);
-};

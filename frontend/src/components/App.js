@@ -13,7 +13,7 @@ import { Login } from './Login';
 import { Register } from './Register';
 import ProtectedRoute from './ProtectedRoute';
 import { InfoToolTip } from './InfoTooltip';
-import { signupFetch, signinFetch, validJWTFetch, logout } from '../utils/auth';
+import { signupFetch, signinFetch, validJWTFetch } from '../utils/auth';
 
 export const App = () => {
   const navigate = useNavigate();
@@ -117,7 +117,7 @@ export const App = () => {
   const onRegister = async (userData) => {
     const response = await signupFetch(userData);
 
-    if (response) {
+    if (response.data) {
       setMessageAcceptAuth('Вы успешно зарегистрировались!');
       setIsAccept(true);
       setInfoTooltip(true);
@@ -129,66 +129,49 @@ export const App = () => {
     }
   };
 
-  // const tokenCheck = () => {
-  //   const token = localStorage.getItem('token');
-  //   if (!token) {
-  //     return false;
-  //   }
-  //   return validJWTFetch(token);
-  // };
+ // Проверка токена
+  const tokenCheck = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return false;
+    }
+    return validJWTFetch(token);
+  };
 
-  //Авторизация (Войти)
+ // Авторизация (вход)
   const onLogin = async (userData) => {
     const response = await signinFetch(userData);
-    console.log('ПОСМОТРИ ТУТ Арр', response)
 
-    if (response) {
-      console.log('ПОСМОТРИ ТУТ Арр2', response)
+    if (response.token) {
       setLogin(true);
       setUserDataAuth(userData);
-      // localStorage.setItem('token', response.token);
+      localStorage.setItem('token', response.token);
       navigate('/main');
     } else {
-      console.log('ПОСМОТРИ ТУТ Арр3', response)
       setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
       setIsAccept(false);
       setInfoTooltip(true);
     }
   };
 
-  // выход из аккаунта
-  const onSignOut = async () => {
-    const response = await logout()
-    if (response) {
-      setLogin(false);
-      setUserDataAuth({
-        email: '',
-      });
-      navigate('/sign-in');
-    } else {
-      console.log(`Что-то пошло не так!`);
-    }
+  // Выход из аккаунта
+  const onSignOut = () => {
+    localStorage.removeItem('token');
+    setLogin(false);
+    setUserDataAuth({
+      email: '',
+    });
   };
-
-  console.log(login)
 
   useEffect(() => {
     (async () => {
-      const response = await validJWTFetch();
-      console.log('я тут', response);
+      const response = await tokenCheck();
       if (response) {
-        console.log('я тут', response)
         setLogin(true);
         setUserDataAuth({
-          email: response.email,
+          email: response.data.email,
         });
         navigate('/main');
-      } else {
-        setLogin(false);
-        setUserDataAuth({
-          email:'',
-        });
-        navigate('/sign-in');
       }
     })();
   }, []);
@@ -201,7 +184,6 @@ export const App = () => {
     if (login) {
       Promise.all([api.getUserInfo(), api.getCardList()])
         .then((res) => {
-          console.log('тут',res)
           const [userData, cards] = res;
           setCurrentUser(userData);
           setCards(cards);

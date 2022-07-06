@@ -1,11 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
-const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/loggers');
-const { login, createUser, logout } = require('./controllers/users');
+const { login, createUser } = require('./controllers/users');
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const auth = require('./middlewares/auth');
@@ -26,8 +25,6 @@ const allowedCors = {
 
 const app = express();
 const { PORT = 3000 } = process.env;
-
-app.use(cookieParser());
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
@@ -67,7 +64,7 @@ app.post(
   }),
   createUser,
 );
-app.post('/logout', logout);
+
 app.use(auth);
 
 app.use(userRouter);

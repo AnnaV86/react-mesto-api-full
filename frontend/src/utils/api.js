@@ -8,7 +8,6 @@ export class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-      credentials: 'include',
     }).then(this._getResponseData);
   }
 
@@ -16,7 +15,6 @@ export class Api {
   getCardList() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-      credentials: 'include',
     }).then(this._getResponseData);
   }
 
@@ -29,7 +27,6 @@ export class Api {
         name: userData.name,
         about: userData.about,
       }),
-      credentials: 'include',
     }).then(this._getResponseData);
   }
 
@@ -42,7 +39,6 @@ export class Api {
         name: newCard.name,
         link: newCard.link,
       }),
-      credentials: 'include',
     }).then(this._getResponseData);
   }
 
@@ -51,7 +47,6 @@ export class Api {
     return fetch(`${this._baseUrl}cards/${id}`, {
       method: 'DELETE',
       headers: this._headers,
-      credentials: 'include',
     }).then(this._getResponseData);
   }
 
@@ -64,7 +59,6 @@ export class Api {
     return fetch(`${this._baseUrl}cards/${id}/likes`, {
       method: 'PUT',
       headers: this._headers,
-      credentials: 'include',
     }).then(this._getResponseData);
   }
 
@@ -73,7 +67,6 @@ export class Api {
     return fetch(`${this._baseUrl}cards/${id}/likes`, {
       method: 'DELETE',
       headers: this._headers,
-      credentials: 'include',
     }).then(this._getResponseData);
   }
 
@@ -85,7 +78,6 @@ export class Api {
       body: JSON.stringify({
         avatar: avatarLink,
       }),
-      credentials: 'include',
     }).then(this._getResponseData);
   }
 
@@ -101,6 +93,7 @@ export class Api {
 const api = new Api({
   baseUrl: 'http://api.mestovid.students.nomoredomains.xyz',
   headers: {
+    authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json',
   },
 });

@@ -20,25 +20,10 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      res.cookie('jwt', token, {
-        maxAge: 3600000 * 24 * 7,
-        httpOnly: false,
-      }).status(200)
-        .send({ message: 'Вход выполнен' });
+      res.status(200)
+        .send({ message: 'Вход выполнен', token });
     })
     .catch(() => next(new UnauthorizedError('Неправильные почта или пароль')));
-};
-
-// Выход из аккаунта logout
-module.exports.logout = (req, res, next) => {
-  User.findById(req.user._id)
-    .then((user) => {
-      if (!user) {
-        return next(new NotFoundError('Пользователь не найден'));
-      }
-      return res.clearCookie('jwt').status(200).send({ message: 'Выход выполнен' });
-    })
-    .catch(next);
 };
 
 // Получение информации о пользователе GET users/me
