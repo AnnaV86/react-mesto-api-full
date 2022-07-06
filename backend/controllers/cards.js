@@ -68,7 +68,7 @@ module.exports.dislikeCard = (req, res, next) => {
         throw new NotFoundError('Передан несуществующий _id карточки');
       }
       res.send({
-        id: card.id,
+        _id: card.id,
         name: card.name,
         link: card.link,
         owner: card.owner,

@@ -58,10 +58,10 @@ export const Main = ({
               return (
                 <Card
                   card={card}
-                  key={card._id}
                   onCardClick={onCardClick}
                   onCardLike={onCardLike}
                   onCardDelete={onCardDelete}
+                  key={card._id}
                 />
               );
             })}

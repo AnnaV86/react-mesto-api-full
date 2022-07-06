@@ -4,7 +4,6 @@ const BASE_URL = 'http://api.mestovid.students.nomoredomains.xyz';
  * Обработка ответа от сервера
  */
 const getResponse = (response) => {
-  console.log('ответа от сервера', response)
   try {
     if (!response.ok) {
       throw new Error('Ошибка запроса');
