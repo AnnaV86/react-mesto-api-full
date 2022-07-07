@@ -17,4 +17,4 @@ node_modules
 # Secret key
 .env
 
-*.log 
+*.log

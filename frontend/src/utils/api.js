@@ -89,7 +89,7 @@ export class Api {
   }
 }
 
-const api = new Api({
+export let api = new Api({
   baseUrl: 'http://api.mestovid.students.nomoredomains.xyz',
   headers: {
     authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -97,4 +97,4 @@ const api = new Api({
   },
 });
 
-export default api;
+

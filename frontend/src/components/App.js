@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import { Header } from './Header';
 import { Main } from './Main';
 import { ImagePopup } from './ImagePopup';
-import api from '../utils/api';
+import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { EditProfilePopup } from './EditProfilePopup';
 import { EditAvatarPopup } from './EditAvatarPopup';
@@ -109,11 +109,11 @@ export const App = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleEscClose = (e) => {
+  const handleEscClose = useCallback((e) => {
     if (e.key === 'Escape') {
       closeAllPopups();
     }
-  };
+  }, [])
 
   // Регистрация
   const onRegister = async (userData) => {
@@ -145,9 +145,10 @@ export const App = () => {
     const response = await signinFetch(userData);
 
     if (response.token) {
+      localStorage.setItem('token', response.token);
+      api._headers.authorization = `Bearer ${localStorage.getItem('token')}`
       setLogin(true);
       setUserDataAuth(userData);
-      localStorage.setItem('token', response.token);
       navigate('/main');
     } else {
       setMessageAcceptAuth('Что-то пошло не так! Попробуйте ещё раз.');
@@ -174,26 +175,25 @@ export const App = () => {
         setUserDataAuth({
           email: response.email,
         });
-        navigate('/main');
       }
     })();
-  }, [login]);
+  }, [login, navigate]);
 
   useEffect(() => {
     document.addEventListener('keyup', handleEscClose);
-  }, []);
+  }, [handleEscClose]);
 
   useEffect(() => {
-    if (login) {
-      Promise.all([api.getUserInfo(), api.getCardList()])
-        .then((res) => {
-          const [userData, cards] = res;
-          setCurrentUser(userData);
-          setCards(cards);
-        })
-        .catch((err) => console.log(err));
+     if (login) {
+      (async () => {
+        const user = await api.getUserInfo()
+        const cards = await api.getCardList()
+        setCurrentUser(user);
+        setCards(cards);
+        navigate('/main');
+      })()
     }
-  }, [login]);
+  }, [login, navigate]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
