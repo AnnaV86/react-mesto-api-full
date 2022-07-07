@@ -34,6 +34,7 @@ export const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar }) => {
       avatar: avatarRef.current.value,
     });
     avatarRef.current.value = '';
+    setLinkValid(false)
   };
 
   useEffect(() => {
@@ -60,7 +61,7 @@ export const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar }) => {
         onChange={handleChangeLink}
       />
       <span className={classErrorLink}>{linkErrorMessage}</span>
-      <button className={classPopupButton} type='submit'>
+      <button className={classPopupButton} type='submit'  disabled={ !isLinkValid ?  true : false}>
         {buttonText}
       </button>
     </PopupWithForm>

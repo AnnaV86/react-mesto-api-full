@@ -57,6 +57,8 @@ export const AddPlacePopup = ({ isOpen, onClose, onAddPlace, currentUser }) => {
     });
     setName('');
     setLink('');
+    setLinkValid(false);
+    setNameValid(false);
   };
 
   useEffect(() => {
@@ -97,7 +99,7 @@ export const AddPlacePopup = ({ isOpen, onClose, onAddPlace, currentUser }) => {
         onChange={handleChangeLink}
       />
       <span className={classErrorLink}>{linkErrorMessage}</span>
-      <button className={classPopupButton} type='submit'>
+      <button className={classPopupButton} type='submit' disabled={(!isNameValid || !isLinkValid) ?  true : false}>
         {buttonText}
       </button>
     </PopupWithForm>

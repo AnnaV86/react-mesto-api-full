@@ -23,7 +23,7 @@ export const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
     ['popup__button_disabled']: !isNameValid || !isDescriptionValid,
   });
 
-  const handleChangeName = (e) => {
+    const handleChangeName = (e) => {
     checkNameValidation(e.target);
     setName(e.target.value);
   };
@@ -98,7 +98,7 @@ export const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
         onChange={handleChangeDescription}
       />
       <span className={classErrorAboutMe}>{descriptionErrorMessage}</span>
-      <button className={classPopupButton} type='submit'>
+      <button className={classPopupButton} type='submit' disabled={(!isNameValid || !isDescriptionValid) ?  true : false}>
         {buttonText}
       </button>
     </PopupWithForm>

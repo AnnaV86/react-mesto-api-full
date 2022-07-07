@@ -72,9 +72,10 @@ app.use(auth);
 
 app.use(userRouter);
 app.use(cardRouter);
-app.use(errorLogger);
 
 app.use('*', (req, res, next) => next(new NotFoundError('Запрошен не существующий ресурс')));
+app.use(errorLogger);
+
 app.use(errors());
 
 app.use(centralError);
