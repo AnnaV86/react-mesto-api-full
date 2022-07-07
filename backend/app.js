@@ -14,11 +14,11 @@ const NotFoundError = require('./errors/notFoundError');
 
 const allowedCors = {
   origin: [
+    'https://mestovid.students.nomoredomains.sbs',
+    'http://mestovid.students.nomoredomains.sbs',
     'https://praktikum.tk',
     'http://praktikum.tk',
     'http://localhost:3000',
-    'http://mestovid.students.nomoredomains.sbs',
-    'https://mestovid.students.nomoredomains.sbs',
   ],
   allowedHeaders: ['Content-Type', 'Origin', 'Referer', 'Accept', 'Authorization'],
   preflightContinue: false,

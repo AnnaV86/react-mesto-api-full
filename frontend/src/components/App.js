@@ -118,8 +118,8 @@ export const App = () => {
   // Регистрация
   const onRegister = async (userData) => {
     const response = await signupFetch(userData);
-
-    if (response) {
+    console.log(response)
+    if (response._id) {
       setMessageAcceptAuth('Вы успешно зарегистрировались!');
       setIsAccept(true);
       setInfoTooltip(true);
