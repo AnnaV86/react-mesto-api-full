@@ -39,7 +39,6 @@ export class Api {
       body: JSON.stringify({
         name: newCard.name,
         link: newCard.link,
-        user: newCard.user,
       }),
     }).then(this._getResponseData);
   }

@@ -54,7 +54,6 @@ export const AddPlacePopup = ({ isOpen, onClose, onAddPlace, currentUser }) => {
     onAddPlace({
       name,
       link,
-      user: currentUser,
     });
     setName('');
     setLink('');
