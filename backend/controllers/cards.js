@@ -14,9 +14,9 @@ module.exports.getCards = (req, res, next) => {
 };
 
 // Создание карточки POST
-module.exports.createCard = (req, res, next) => {
+module.exports.createCard = async (req, res, next) => {
   // const { name, link } = req.body;
-  const owner = User.findById(req.user._id);
+  const owner = await User.findById(req.user._id);
   console.log(owner);
   Card.create({ name: req.user, link: req.user._id, owner })
     .then(async (card) => res.send(card))
