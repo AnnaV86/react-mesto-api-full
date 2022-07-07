@@ -1,4 +1,4 @@
-const BASE_URL = 'http://api.mestovid.students.nomoredomains.xyz';
+const BASE_URL = 'https://api.mestovid.students.nomoredomains.xyz';
 
 /**
  * Обработка ответа от сервера

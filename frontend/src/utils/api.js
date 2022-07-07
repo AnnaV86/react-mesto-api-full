@@ -90,7 +90,7 @@ export class Api {
 }
 
 export let api = new Api({
-  baseUrl: 'http://api.mestovid.students.nomoredomains.xyz',
+  baseUrl: 'https://api.mestovid.students.nomoredomains.xyz',
   headers: {
     authorization: `Bearer ${localStorage.getItem('token')}`,
     Accept: 'application/json',
