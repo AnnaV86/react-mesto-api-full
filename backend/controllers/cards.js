@@ -3,6 +3,7 @@ const { messagesError } = require('../utils/messagesError');
 const NotFoundError = require('../errors/notFoundError');
 const BadRequestError = require('../errors/badRequestError');
 const ForbiddenError = require('../errors/forbiddenError');
+const User = require('../models/user');
 
 // Поиск всех карточек GET
 module.exports.getCards = (req, res, next) => {
@@ -15,8 +16,9 @@ module.exports.getCards = (req, res, next) => {
 // Создание карточки POST
 module.exports.createCard = (req, res, next) => {
   // const { name, link } = req.body;
+  const owner = User.findById(req.user._id);
 
-  Card.create({ name: req.user, link: req.user._id, owner: req.user })
+  Card.create({ name: req.user, link: req.user._id, owner })
     .then(async (card) => res.send(card))
     .catch((error) => {
       if (error.name === 'ValidationError') {
