@@ -45,6 +45,7 @@ export const signinFetch = async (authData) => {
   const response = await fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(authData),

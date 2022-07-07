@@ -21,6 +21,8 @@ const allowedCors = {
     'https://mestovid.students.nomoredomains.sbs',
   ],
   allowedHeaders: ['Content-Type', 'Origin', 'Referer', 'Accept', 'Authorization'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
   credentials: true,
 };
 
@@ -34,7 +36,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 app.use(express.json());
 app.use(requestLogger);
-app.use(cors(allowedCors));
+app.use('*', cors(allowedCors));
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
@@ -72,8 +74,8 @@ app.use(userRouter);
 app.use(cardRouter);
 app.use(errorLogger);
 
-app.use(errors());
 app.use('*', (req, res, next) => next(new NotFoundError('Запрошен не существующий ресурс')));
+app.use(errors());
 
 app.use(centralError);
 
