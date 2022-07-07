@@ -104,7 +104,6 @@ export const App = () => {
     api
       .postNewCard(card)
       .then((newCard) => {
-        console.log('получаем', newCard)
         return setCards([newCard, ...cards])})
       .then(() => closeAllPopups())
       .catch((err) => console.log(err));

@@ -9,7 +9,10 @@ const User = require('../models/user');
 module.exports.getCards = (req, res, next) => {
   Card.find({})
     .populate('owner')
-    .then((result) => res.send(result))
+    .then((result) => {
+      const sortResult = result.sort((a, b) => a.createdAt - b.createdAt);
+      return res.send(sortResult);
+    })
     .catch(next);
 };
 
