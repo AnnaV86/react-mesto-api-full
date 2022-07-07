@@ -10,7 +10,7 @@ module.exports.getCards = (req, res, next) => {
   Card.find({})
     .populate('owner')
     .then((result) => {
-      const sortResult = result.sort((a, b) => a.createdAt - b.createdAt);
+      const sortResult = result.sort((a, b) => b.createdAt - a.createdAt);
       return res.send(sortResult);
     })
     .catch(next);
